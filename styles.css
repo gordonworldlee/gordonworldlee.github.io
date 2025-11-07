@@ -1,0 +1,342 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #1a1a2e;
+    --secondary-color: #0f3460;
+    --accent-gold: #d4af37;
+    --text-light: #e8e8e8;
+    --text-dark: #1a1a2e;
+    --zeus-blue: #4a90e2;
+    --athena-bronze: #b87333;
+}
+
+body {
+    font-family: 'Georgia', serif;
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Navigation */
+.navbar {
+    position: sticky;
+    top: 0;
+    background: rgba(26, 26, 46, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 1rem 0;
+    z-index: 1000;
+    border-bottom: 2px solid var(--accent-gold);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--accent-gold);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+/* Background Effects */
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+}
+
+.classical-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(74, 144, 226, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(184, 115, 51, 0.1) 0%, transparent 50%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.background-gradient {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.zeus-bg {
+    background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 50%, rgba(74, 144, 226, 0.2) 100%);
+}
+
+.athena-bg {
+    background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 50%, rgba(184, 115, 51, 0.2) 100%);
+}
+
+/* Lightning Canvas */
+#lightning-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.lightning-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Homepage */
+.homepage {
+    position: relative;
+    z-index: 10;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+}
+
+.hero {
+    text-align: center;
+    margin-bottom: 6rem;
+    animation: fadeInDown 1s ease;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: var(--accent-gold);
+    text-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--text-light);
+    opacity: 0.9;
+}
+
+.hero-description {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    opacity: 0.7;
+}
+
+/* Card Styles */
+.pantheon-selector {
+    margin-bottom: 6rem;
+}
+
+.pantheon-selector h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--accent-gold);
+}
+
+.god-cards-home {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.card-home {
+    background: linear-gradient(135deg, rgba(74, 144, 226, 0.15) 0%, rgba(184, 115, 51, 0.15) 100%);
+    border: 2px solid var(--accent-gold);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+}
+
+.card-home:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.3);
+    background: linear-gradient(135deg, rgba(74, 144, 226, 0.25) 0%, rgba(184, 115, 51, 0.25) 100%);
+}
+
+.card-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+.card-home h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: var(--accent-gold);
+}
+
+.card-home p {
+    color: var(--text-light);
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
+}
+
+.card-button {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background-color: var(--accent-gold);
+    color: var(--text-dark);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.card-button:hover {
+    background-color: #e8c547;
+    transform: scale(1.05);
+}
+
+/* About Section */
+.about-project {
+    background: linear-gradient(135deg, rgba(74, 144, 226, 0.1) 0%, rgba(184, 115, 51, 0.1) 100%);
+    border-left: 5px solid var(--accent-gold);
+    padding: 2rem;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.about-project h2 {
+    color: var(--accent-gold);
+    margin-bottom: 1rem;
+    font-size: 2rem;
+}
+
+.about-project p {
+    color: var(--text-light);
+    opacity: 0.9;
+    line-height: 1.8;
+}
+
+/* God Pages */
+.god-page {
+    position: relative;
+    z-index: 10;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.god-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    padding: 3rem 0;
+    animation: fadeInDown 0.8s ease;
+}
+
+.god-header h1 {
+    font-size: 4rem;
+    margin-bottom: 0.5rem;
+    color: var(--accent-gold);
+    text-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+}
+
+.god-subtitle {
+    font-size: 1.5rem;
+    color: var(--text-light);
+    opacity: 0.8;
+}
+
+.zeus-header {
+    border-bottom: 3px solid var(--zeus-blue);
+    margin-bottom: 3rem;
+}
+
+.athena-header {
+    border-bottom: 3px solid var(--athena-bronze);
+    margin-bottom: 3rem;
+}
+
+/* Content Section */
+.content-section {
+    margin-bottom: 4rem;
+}
+
+.two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.column {
+    background: linear-gradient(135deg, rgba(74, 144, 226, 0.08) 0%, rgba(184, 115, 51, 0.08) 100%);
+    padding: 2rem;
+    border-radius: 10px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.column h2 {
+    color: var(--accent-gold);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--accent-gold);
+    padding-bottom: 1rem;
+}
+
+.column h
