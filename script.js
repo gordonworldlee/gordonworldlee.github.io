@@ -1,4 +1,5 @@
 // Lightning Effect for Zeus Page
+// Lightning Effect for Zeus Page - IMPROVED VERSION
 function initLightning() {
     const canvas = document.getElementById('lightning-canvas');
     if (!canvas) return;
@@ -13,6 +14,7 @@ function initLightning() {
         ctx.strokeStyle = 'rgba(74, 144, 226, 0.8)';
         ctx.lineWidth = blur / 10;
         ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
 
         ctx.beginPath();
         ctx.moveTo(fromX, fromY);
@@ -23,11 +25,16 @@ function initLightning() {
         while (Math.hypot(x - toX, y - toY) > 5) {
             const angle = Math.atan2(toY - y, toX - x);
             const distance = Math.hypot(x - toX, y - toY);
-            const randomAngle = angle + (Math.random() - 0.5) * 0.3;
-            const step = Math.min(10, distance);
-
+            
+            // MORE JAGGED: Increased randomness and angle variation
+            const randomAngle = angle + (Math.random() - 0.5) * 0.8; // Increased from 0.3
+            const step = Math.min(15, distance); // Increased from 10
+            
+            // Add extra jagged offset
+            const jaggerAmount = (Math.random() - 0.5) * 30; // Extra randomness
+            
             x += Math.cos(randomAngle) * step;
-            y += Math.sin(randomAngle) * step;
+            y += Math.sin(randomAngle) * step + jaggerAmount;
 
             ctx.lineTo(x, y);
         }
@@ -36,33 +43,44 @@ function initLightning() {
     }
 
     function createRandomLightning() {
-        ctx.fillStyle = 'rgba(26, 26, 46, 0.1)';
+        ctx.fillStyle = 'rgba(26, 26, 46, 0.08)'; // Slightly more transparent fade
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        if (Math.random() > 0.7) {
+        if (Math.random() > 0.6) { // More frequent lightning (was 0.7)
             const startX = Math.random() * canvas.width;
             const startY = 0;
-            const endX = Math.random() * canvas.width;
+            const endX = Math.random() * canvas.width + (Math.random() - 0.5) * 200; // More horizontal variation
             const endY = canvas.height;
 
+            // Draw multiple branches for more jagged effect
             drawLightning(startX, startY, endX, endY, 20);
-            drawLightning(startX, startY, endX, endY, 5);
+            drawLightning(startX, startY, endX, endY, 8);
+            drawLightning(startX, startY, endX, endY, 3); // Added thin branch
+            
+            // Random branch bolts
+            if (Math.random() > 0.5) {
+                const branchX = startX + (endX - startX) * 0.6;
+                const branchY = startY + (endY - startY) * 0.6;
+                drawLightning(branchX, branchY, Math.random() * canvas.width, canvas.height, 10);
+            }
         }
     }
 
-    setInterval(createRandomLightning, 200);
+    setInterval(createRandomLightning, 150); // Faster updates (was 200ms)
     window.addEventListener('resize', () => {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
     });
 }
 
+
+
 // Star Generation
 function generateStars() {
     const starsContainer = document.querySelector('.stars');
     if (!starsContainer) return;
 
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 1000; i++) {
         const star = document.createElement('div');
         star.style.position = 'fixed';
         star.style.width = Math.random() * 2 + 'px';
