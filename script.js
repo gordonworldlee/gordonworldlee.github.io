@@ -107,11 +107,64 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Page Load Animation
+function initOcean() {
+    const canvas = document.getElementById('ocean-canvas');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let waveOffset = 0;
+
+    function drawOcean() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draw water color
+        ctx.fillStyle = '#003366';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Draw waves
+        ctx.strokeStyle = '#0066cc';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+
+        for (let x = 0; x < canvas.width; x += 5) {
+            const y = canvas.height / 2 + Math.sin((x + waveOffset) * 0.02) * 30;
+            if (x === 0) {
+                ctx.moveTo(x, y);
+            } else {
+                ctx.lineTo(x, y);
+            }
+        }
+        ctx.stroke();
+
+        // Add some whitecaps
+        ctx.fillStyle = '#ffffff';
+        for (let x = 0; x < canvas.width; x += 20) {
+            const y = canvas.height / 2 + Math.sin((x + waveOffset) * 0.02) * 30;
+            ctx.fillRect(x, y - 2, 2, 4);
+        }
+
+        waveOffset += 1;
+        requestAnimationFrame(drawOcean);
+    }
+
+    drawOcean();
+
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+}
+
+// Call initOcean when the page loads
 window.addEventListener('load', () => {
-    initLightning();
+    initOcean();
+    initLightning(); // Keep lightning for Zeus
     generateStars();
 });
+
 
 // Update Active Nav Link
 window.addEventListener('scroll', () => {
@@ -126,3 +179,4 @@ window.addEventListener('scroll', () => {
         }
     });
 });
+
